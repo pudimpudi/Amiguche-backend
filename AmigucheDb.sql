@@ -2,6 +2,8 @@ CREATE DATABASE amiguche;
 
 use amiguche;
 
+--tirei a tabela contato,alterei os nomes das tabelas e tirei a função auto increment da tabela pedidos, explicação no file pedidos repository
+
 CREATE TABLE produto(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50),
@@ -44,7 +46,7 @@ CREATE TABLE clientes(
 )
 
 CREATE TABLE pedidos(
-    id_pedidos INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedidos INT PRIMARY KEY,
     data_pedido DATETIME,
     status VARCHAR(50),
     id_clientes INT,

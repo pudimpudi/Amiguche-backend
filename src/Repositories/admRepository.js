@@ -1,4 +1,4 @@
-import connection from "./Connection";
+import connection from "./Connection.js";
 
 export async function listarAdm() {     
   const comando=`SELECT * FROM adm`;

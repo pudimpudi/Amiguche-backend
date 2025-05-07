@@ -32,7 +32,7 @@ endpoints.delete("/variantes/:id", async (req, resp) => {
 endpoints.get("/variantes/:id", async (req, resp) => {
   let id = req.params.id;
 
-  let variante = await variantesRepository.buscarVariantesPorId(id);
+  let variantes = await variantesRepository.buscarVariantesPorId(id);
   if (!variantes) {
     return resp.status(404).send({ message: "Variantes não encontrado" });
   }

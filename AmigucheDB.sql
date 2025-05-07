@@ -54,3 +54,11 @@ CREATE TABLE pedidos(
     Foreign Key (id_produto) REFERENCES produto(id_produto),
     FOREIGN KEY (id_clientes) REFERENCES clientes(id_clientes)
 )
+
+CREATE TABLE pedidos_produtos(
+    id_pedidos_produtos INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedidos INT,
+    id_produto INT,
+    FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),
+    FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
+)

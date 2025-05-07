@@ -1,5 +1,5 @@
 import * as variantesRepository from "../Repositories/variantesRepository.js";
-import e, { Router } from "express";
+import { Router } from "express";
 const endpoints = Router();
 
 endpoints.get("/variantes", async (req, resp) => {

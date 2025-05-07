@@ -1,5 +1,5 @@
 import * as produtoRepository from "../Repositories/produtoRepository.js";
-import e, { Router } from "express";
+import { Router } from "express";
 const endpoints = Router();
 
 endpoints.get("/produto", async (req, resp) => {

@@ -15,28 +15,28 @@ endpoints.post('/cliente', async (req, resp) => {
 })
 
 endpoints.put('/cliente/:id', async (req, resp) => {
-    let id = req.params.id;
-    let cliente = req.body;
+  let id = req.params.id;
+  let cliente = req.body;
 
-    await clienteRepository.atualizarCliente(id, cliente);
-    resp.send({ message: "Cliente atualizado com sucesso" });
+  await clienteRepository.atualizarCliente(id, cliente);
+  resp.send({ message: "Cliente atualizado com sucesso" });
 })
 
 endpoints.delete('/cliente/:id', async (req, resp) => {
-    let id = req.params.id;
+  let id = req.params.id;
 
-    await clienteRepository.removerCliente(id);
-    resp.send({ message: "Cliente removido com sucesso" });
+  await clienteRepository.removerCliente(id);
+  resp.send({ message: "Cliente removido com sucesso" });
 })
 
 endpoints.get('/cliente/:id', async (req, resp) => {
-    let id = req.params.id;
+  let id = req.params.id;
 
-    let cliente = await clienteRepository.buscarClientePorId(id);
-    if (!cliente) {
-        return resp.status(404).send({ message: "Cliente não encontrado" });
-    }
-    resp.send(cliente);
+  let cliente = await clienteRepository.buscarClientePorId(id);
+  if (!cliente) {
+    return resp.status(404).send({ message: "Cliente não encontrado" });
+  }
+  resp.send(cliente);
 })
 
 export default endpoints;

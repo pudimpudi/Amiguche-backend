@@ -8,7 +8,7 @@ const uploadImagem = multer({
 });
 
 endpoints.post(
-  "/imagem/:id_produto/:id_variante",
+  "/imagem/:id_produto/:id_variantes",
   uploadImagem.single("imagem"),
   async (req, resp) => {
     let imagem = req.file;
@@ -16,8 +16,9 @@ endpoints.post(
       caminho: imagem.path,
       tipo: imagem.mimetype,
       id_produto: req.params.id_produto,
-      id_variante: req.params.id_variante,
+      id_variantes: req.params.id_variantes,
     });
+
 
     resp
       .status(201)
@@ -53,9 +54,10 @@ endpoints.get(
     if (!imagens || imagens.length === 0) {
       return resp.status(404).send({ message: "Nenhuma imagem encontrada" });
     }
+
     resp.send({
-      imagems: imagens,
-      tipo: imagens.mimetype,
+      imagens: imagens[0].caminho,
+      tipo: imagens[0].tipo
     });
   }
 );

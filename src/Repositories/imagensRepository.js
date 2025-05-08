@@ -9,30 +9,30 @@ export async function enviarImagem(imagem) {
 
 
 export async function buscarImagemPorId(id_imagem) {
-    const comando = `SELECT * FROM imagens WHERE id_imagem = ?`;
+    const comando = `SELECT * FROM imagens WHERE id_imagens = ?`;
     const [rows] = await connection.query(comando, [id_imagem]);
     return rows[0];
 }
 
 export async function buscarImagensPorProdutoVariante(id_produto, id_variante) {
     let comando = `
-        SELECT id_imagens, caminho 
+        SELECT id_imagens, caminho, tipo
         FROM imagens 
         WHERE id_produto = ? AND id_variantes = ?
     `;
-    let [linhas] = await conexao.query(comando, [id_produto, id_variante]);
+    let [linhas] = await connection.query(comando, [id_produto, id_variante]);
     return linhas;
 }
 
 
 export async function removerImagem(id_imagem) {
-    const comando = `DELETE FROM imagens WHERE id_imagem = ?`;
+    const comando = `DELETE FROM imagens WHERE id_imagens = ?`;
     const [rows] = await connection.query(comando, [id_imagem]);
     return rows.affectedRows;
 }
 
 export async function alterarImagem(imagem) {
-    const comando = `UPDATE imagens SET caminho = ?, tpo=? WHERE id_imagem = ?`;
+    const comando = `UPDATE imagens SET caminho = ?, tpo=? WHERE id_imagens = ?`;
     const [rows] = await connection.query(comando, [imagem.caminho,imagem.tipo, imagem.id_imagem]);
     return rows.affectedRows;
 }

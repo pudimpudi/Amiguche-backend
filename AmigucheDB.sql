@@ -6,8 +6,7 @@ use amiguche;
 
 CREATE TABLE produto(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50),
-    categoria VARCHAR(50)
+    nome VARCHAR(50)
 )
 
 create TABLE variantes(

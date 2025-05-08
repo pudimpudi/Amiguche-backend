@@ -8,7 +8,7 @@ endpoints.get("/variantes", async (req, resp) => {
 });
 
 endpoints.post("/variantes", async (req, resp) => {
-  let variante = req.body;
+  let variante = req.body; 
 
   let novoId = await variantesRepository.criarVariantes(variante);
   resp.send({ novoId });
@@ -18,7 +18,7 @@ endpoints.put("/variantes/:id", async (req, resp) => {
   let id = req.params.id;
   let variante = req.body;
 
-  await variantesRepository.atualizarVariantes(id, variante);
+  await variantesRepository.alterarVariantes(id, variante);
   resp.send({ message: "Variantes atualizado com sucesso" });
 });
 

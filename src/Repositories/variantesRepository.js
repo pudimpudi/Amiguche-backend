@@ -6,9 +6,9 @@ export async function listarVariantes() {
     return rows;
 }
 
-export async function criarVariantes(variantes) {
-    const comando = `INSERT INTO variantes (id_variante, descricao, preco) VALUES (?, ?, ?)`;
-    const [rows] = await connection.query(comando, [variantes.id_variante, variantes.descricao, variantes.preco]);
+export async function criarVariantes(variante) {
+    const comando = `INSERT INTO variantes ( descricao, preco,id_produto) VALUES (?, ?, ?)`;
+    const [rows] = await connection.query(comando, [ variante.descricao, variante.preco, variante.id]);
     return rows.insertId;
 }
 
@@ -33,5 +33,5 @@ export async function buscarVariantesPorId(id_variante) {
 export async function buscarVariantesPorProduto(id_produto) {
     const comando = `SELECT * FROM variantes WHERE id_produto = ?`;
     const [rows] = await connection.query(comando, [id_produto]);
-    return rows[0];
+    return rows;
 }

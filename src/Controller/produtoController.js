@@ -7,6 +7,12 @@ endpoints.get("/produto", async (req, resp) => {
   resp.send(registros);
 });
 
+endpoints.get("/produto/:id",async (req,resp)=>{
+  let id = req.params.id;
+  let registro=await produtoRepository.buscarProdutoPorId(id);
+  resp.send(registro);
+})
+
 endpoints.post("/produto", async (req, resp) => {
   let produto = req.body;
 

@@ -1,9 +1,11 @@
 import adicionarRotas from './routes.js';
 import express from 'express';
 import 'dotenv/config'
+import cors from 'cors';
 
 const server=express();
 server.use(express.json());
+server.use(cors())
 
 adicionarRotas(server);
 

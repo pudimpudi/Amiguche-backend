@@ -19,7 +19,7 @@ create TABLE variantes(
 
 CREATE TABLE imagens(
     id_imagens INT PRIMARY KEY AUTO_INCREMENT,
-    caminho VARCHAR(200),
+    caminho VARCHAR(250),
     id_variantes INT,
     id_produto INT,
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto),

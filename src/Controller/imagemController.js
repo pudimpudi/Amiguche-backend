@@ -14,6 +14,7 @@ endpoints.post(
     let imagem = req.file;
     let novoId = await imagemRepository.enviarImagem({
       caminho: imagem.path,
+      tipo: imagem.mimetype,
       id_produto: req.params.id_produto,
       id_variante: req.params.id_variante,
     });
@@ -52,7 +53,10 @@ endpoints.get(
     if (!imagens || imagens.length === 0) {
       return resp.status(404).send({ message: "Nenhuma imagem encontrada" });
     }
-    resp.send(imagens);
+    resp.send({
+      imagems: imagens,
+      tipo: imagens.mimetype,
+    });
   }
 );
 
@@ -70,6 +74,7 @@ endpoints.put(
     let updated = await imagemRepository.alterarImagem({
       id_imagem: id,
       caminho: imagem.path,
+      tipo: imagem.mimetype,
     });
 
     if (!updated) {

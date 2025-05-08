@@ -2,8 +2,8 @@ import connection from "./Connection.js";
 
 
 export async function enviarImagem(imagem) {
-    const comando = `INSERT INTO imagens (caminho, id_variante, id_produto) VALUES (?, ?, ?)`;
-    const [rows] = await connection.query(comando, [imagem.caminho, imagem.id_variante, imagem.id_produto]);
+    const comando = `INSERT INTO imagens (caminho,tipo, id_variantes, id_produto) VALUES (?, ?, ?, ?)`;
+    const [rows] = await connection.query(comando, [imagem.caminho,imagem.tipo, imagem.id_variantes, imagem.id_produto]);
     return rows.insertId;
 }
 
@@ -32,8 +32,8 @@ export async function removerImagem(id_imagem) {
 }
 
 export async function alterarImagem(imagem) {
-    const comando = `UPDATE imagens SET caminho = ? WHERE id_imagem = ?`;
-    const [rows] = await connection.query(comando, [imagem.caminho, imagem.id_imagem]);
+    const comando = `UPDATE imagens SET caminho = ?, tpo=? WHERE id_imagem = ?`;
+    const [rows] = await connection.query(comando, [imagem.caminho,imagem.tipo, imagem.id_imagem]);
     return rows.affectedRows;
 }
 

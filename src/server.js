@@ -7,6 +7,9 @@ const server=express();
 server.use(express.json());
 server.use(cors())
 
+// EXPOR PASTA DE IMAGENS
+server.use('/storage', express.static('storage'));
+
 adicionarRotas(server);
 
 const PORT = process.env.PORT;

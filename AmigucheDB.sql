@@ -1,6 +1,10 @@
 CREATE DATABASE amiguche;
 
+drop DATABASE amiguche;
+
 use amiguche;
+
+select * from imagens;
 
 --tirei a tabela contato,alterei os nomes das tabelas e tirei a função auto increment da tabela pedidos, explicação no file pedidos repository
 
@@ -12,7 +16,7 @@ CREATE TABLE produto(
 create TABLE variantes(
     id_variantes INT PRIMARY KEY AUTO_INCREMENT,
     descricao VARCHAR(400),
-    preco DECIMAL(3,2),
+    preco DECIMAL(5,2),
     id_produto INT,
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 )
@@ -20,6 +24,7 @@ create TABLE variantes(
 CREATE TABLE imagens(
     id_imagens INT PRIMARY KEY AUTO_INCREMENT,
     caminho VARCHAR(250),
+    tipo VARCHAR(15),
     id_variantes INT,
     id_produto INT,
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto),

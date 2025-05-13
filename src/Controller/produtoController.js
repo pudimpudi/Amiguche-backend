@@ -33,21 +33,6 @@ endpoints.put("/produto/:id", async (req, resp) => {
 endpoints.delete("/produto/:id", async (req, resp) => {
   try{
     let id = req.params.id;
-  
-    let imagens = await buscarImagemPorProduto(id);
-    if(imagens){
-      for(let i=0; i<imagens.length; i++){
-        await removerImagem(imagens[i].id_imagens);
-      }
-    }
-
-    let variantes = await buscarVariantesPorProduto(id);
-    if(variantes.length>0){
-      for(let i=0; i<variantes.length; i++){
-        let id_variante = variantes[i].id_variantes;
-        await removerVariantes(id_variante);
-      }
-    }
     await produtoRepository.removerProduto(id);
 
     resp.status(200).send({ message: "Produto removido com sucesso" });

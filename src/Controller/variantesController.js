@@ -29,6 +29,13 @@ endpoints.delete("/variantes/:id", async (req, resp) => {
   resp.send({ message: "Variantes removido com sucesso" });
 });
 
+endpoints.delete("/variantes/produto/:id_produto", async (req, resp) => {
+  let id_produto = req.params.id_produto;
+
+  await variantesRepository.removerVariantesProduto(id_produto);
+  resp.send({ message: "Variantes removido com sucesso" });
+});
+
 endpoints.get("/variantes/:id", async (req, resp) => {
   let id = req.params.id;
 

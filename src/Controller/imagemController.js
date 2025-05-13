@@ -74,6 +74,25 @@ endpoints.get("/imagem/:id", async (req, resp) => {
   }
 });
 
+endpoints.get(
+  "/imagem/produto/:id_produto",
+  async (req, resp) => {
+    try {
+      const id_produto = req.params.id_produto;
+      const imagem = await imagemRepository.buscarImagemPorProduto(id_produto);
+
+      if (!imagem) {
+        return resp.status(404).send({ message: "Imagem não encontrada" });
+      }
+
+      resp.send(imagem);
+    } catch (err) {
+      console.error(err);
+      resp.status(500).send({ message: "Erro ao buscar imagem" });
+    }
+  }
+)
+
 // GET - Buscar imagem por produto e variante
 endpoints.get(
   "/imagem/produto/:id_produto/variante/:id_variante",
@@ -101,6 +120,7 @@ endpoints.get(
   }
 );
 
+// GET - Listar todas as imagens
 endpoints.get("/imagem", async (req, resp) => {
   try {
     const imagens = await imagemRepository.listarImagens();

@@ -12,20 +12,26 @@ export async function criarVariantes(variante) {
     return rows.insertId;
 }
 
-export async function alterarVariantes(variantes) {
-    const comando = `UPDATE variantes SET descricao = ?, preco = ? WHERE id_variante = ?`;
-    const [rows] = await connection.query(comando, [variantes.descricao, variantes.preco, variantes.id_variante]);
+export async function alterarVariantes(id,variantes) {
+    const comando = `UPDATE variantes SET descricao = ?, preco = ? WHERE id_variantes = ?`;
+    const [rows] = await connection.query(comando, [variantes.descricao, variantes.preco, id]);
     return rows.affectedRows;
 }
 
 export async function removerVariantes(id_variante) {
-    const comando = `DELETE FROM variantes WHERE id_variante = ?`;
+    const comando = `DELETE FROM variantes WHERE id_variantes = ?`;
     const [rows] = await connection.query(comando, [id_variante]);
     return rows.affectedRows;
 }
 
+export async function removerVariantesProduto(id_produto) {
+    const comando = `DELETE FROM variantes WHERE id_produto = ?`;
+    const [rows] = await connection.query(comando, id_produto);
+    return rows.affectedRows;
+}
+
 export async function buscarVariantesPorId(id_variante) {
-    const comando = `SELECT * FROM variantes WHERE id_variante = ?`;
+    const comando = `SELECT * FROM variantes WHERE id_variantes = ?`;
     const [rows] = await connection.query(comando, [id_variante]);
     return rows[0];
 }

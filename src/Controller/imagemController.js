@@ -101,6 +101,21 @@ endpoints.get(
   }
 );
 
+endpoints.get("/imagem", async (req, resp) => {
+  try {
+    const imagens = await imagemRepository.listarImagens();
+
+    if (!imagens || imagens.length === 0) {
+      return resp.status(404).send({ message: "Nenhuma imagem encontrada" });
+    }
+
+    resp.send(imagens);
+  } catch (err) {
+    console.error(err);
+    resp.status(500).send({ message: "Erro ao buscar imagens" });
+  }
+});
+
 // PUT - Atualizar imagem existente
 endpoints.put(
   "/imagem/:id",

@@ -14,6 +14,12 @@ export async function buscarImagemPorId(id_imagem) {
     return rows[0];
 }
 
+export async function buscarImagemPorProduto(id_produto) {
+    const comando = `SELECT * FROM imagens WHERE id_produto = ?`;
+    const [rows] = await connection.query(comando, [id_produto]);
+    return rows[0];
+}
+
 export async function buscarImagensPorProdutoVariante(id_produto, id_variante) {
     let comando = `
         SELECT id_imagens, caminho, tipo
@@ -24,6 +30,11 @@ export async function buscarImagensPorProdutoVariante(id_produto, id_variante) {
     return linhas;
 }
 
+export async function listarImagens() {
+    const comando = `SELECT * FROM imagens`;
+    const [rows] = await connection.query(comando);
+    return rows;
+}
 
 export async function removerImagem(id_imagem) {
     const comando = `DELETE FROM imagens WHERE id_imagens = ?`;

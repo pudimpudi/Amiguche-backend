@@ -12,9 +12,9 @@ export async function criarProduto(produto) {
   return rows.insertId;
 }
 
-export async function alterarProduto(produto) {
+export async function alterarProduto(id,produto) {
   const comando = `UPDATE produto SET nome = ? WHERE id_produto = ?`;
-  const [rows] = await connection.query(comando, [produto.nome, produto.id_produto]);
+  const [rows] = await connection.query(comando, [produto.nome,id]);
   return rows.affectedRows;
 }
 

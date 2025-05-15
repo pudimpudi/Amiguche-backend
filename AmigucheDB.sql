@@ -4,7 +4,9 @@ drop DATABASE amiguche;
 
 use amiguche;
 
-select * from imagens;
+select * from variantes;
+
+UPDATE variantes SET descricao = "Teste 5", preco = 1.34, id_produto=3 WHERE id_variantes = 4;
 
 --tirei a tabela contato,alterei os nomes das tabelas e tirei a função auto increment da tabela pedidos, explicação no file pedidos repository
 

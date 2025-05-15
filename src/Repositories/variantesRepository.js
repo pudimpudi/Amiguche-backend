@@ -13,8 +13,8 @@ export async function criarVariantes(variante) {
 }
 
 export async function alterarVariantes(id,variantes) {
-    const comando = `UPDATE variantes SET descricao = ?, preco = ? WHERE id_variantes = ?`;
-    const [rows] = await connection.query(comando, [variantes.descricao, variantes.preco, id]);
+    const comando = `UPDATE variantes SET descricao = ?, preco = ?, id_produto=? WHERE id_variantes = ?`;
+    const [rows] = await connection.query(comando, [variantes.descricao, variantes.preco,variantes.id, id]);
     return rows.affectedRows;
 }
 
@@ -33,6 +33,7 @@ export async function removerVariantesProduto(id_produto) {
 export async function buscarVariantesPorId(id_variante) {
     const comando = `SELECT * FROM variantes WHERE id_variantes = ?`;
     const [rows] = await connection.query(comando, [id_variante]);
+    console.log(rows);
     return rows[0];
 }
 

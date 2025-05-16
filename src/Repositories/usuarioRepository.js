@@ -6,6 +6,12 @@ export async function listarUsuario() {
   return rows;
 }
 
+export async function buscarUsuario(usuario){
+  const comando=`SELECT * FROM usuarios WHERE usuario = ? and senha = ?`;
+  const [rows] = await connection.query(comando, [usuario.usuario, usuario.senha]);
+  return rows[0];
+}
+
 export async function criarUsuario(usuario) {
   const comando = `INSERT INTO usuarios (usuario, senha) VALUES (?, ?)`;
   const [rows] = await connection.query(comando, [usuario.usuario, usuario.senha]);

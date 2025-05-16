@@ -9,6 +9,16 @@ endpoints.get('/usuario', async (req, resp) => {
   resp.send(registros);
 })
 
+endpoints.post('/usuario/login',async (req, resp) => {
+  let usuario= req.body;
+  let usuarioEncontrado = await usuarioRepository.buscarUsuario(usuario);
+  if(usuarioEncontrado){
+    resp.status(200).send({id:usuarioEncontrado.id_usuarios});
+  }else{
+    resp.status(404);
+  }  
+})
+
 endpoints.post('/usuario', async (req, resp) => {
   let usuario = req.body;
 

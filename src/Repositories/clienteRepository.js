@@ -30,3 +30,10 @@ export async function buscarClientePorId(id_cliente) {
   return rows[0];
 }
 
+export async function buscarCliente(cliente) {
+  const comando = `SELECT * FROM clientes WHERE email = ? AND senha = ?`;
+  const [rows] = await connection.query(comando, [cliente.email, cliente.senha]);
+  return rows[0];
+  
+}
+

@@ -9,6 +9,9 @@ export async function listarUsuario() {
 export async function buscarUsuario(usuario){
   const comando=`SELECT * FROM usuarios WHERE usuario = ? and senha = ?`;
   const [rows] = await connection.query(comando, [usuario.usuario, usuario.senha]);
+  if(rows.length === 0){
+    return null;
+  }
   return rows[0];
 }
 

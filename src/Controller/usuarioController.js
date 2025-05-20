@@ -15,7 +15,7 @@ endpoints.post('/usuario/login',async (req, resp) => {
   if(usuarioEncontrado){
     resp.status(200).send({id:usuarioEncontrado.id_usuarios});
   }else{
-    resp.status(404);
+    resp.status(404).send({message: "Usuário não encontrado"});
   }  
 })
 

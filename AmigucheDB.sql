@@ -45,7 +45,7 @@ CREATE TABLE clientes(
     nome VARCHAR(50),
     email VARCHAR(50) NOT NULL,
     senha VARCHAR(50) NOT NULL,
-    endereco VARCHAR(200),
+    rua VARCHAR(200),
     cidade VARCHAR(50),
     estado VARCHAR(50),
     cep VARCHAR(10)

@@ -2,58 +2,91 @@ import * as pedidosRepository from '../Repositories/pedidosRepository.js';
 import { Router } from 'express';
 const endpoints = Router();
 
-endpoints.get('/pedidos', async (req, res) => {
-  const { id_cliente } = req.query;
+endpoints.get('/pedidos', async (req, resp) => {
   try {
-    const pedidos = await pedidosRepository.listarPedidos(id_cliente);
-    res.json(pedidos);
+    const pedidos = await pedidosRepository.listarPedidos();
+    resp.send(pedidos);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao listar pedidos' });
+    resp.status(500).json({ error: 'Erro ao listar pedidos' });
   }
 })
 
-endpoints.post('/pedidos', async (req, res) => {
+endpoints.get('/pedidos/cliente/:id', async (req, resp) => {
+  const cliente = req.params.id;
+  try {
+    const pedidos = await pedidosRepository.listarPedidosPorCliente(cliente);
+    resp.send(pedidos);
+  } catch (error) {
+    console.error(error);
+    resp.status(500).json({ error: 'Erro ao listar pedidos por cliente' });
+  }
+});
+
+endpoints.post('/pedidos', async (req, resp) => {
   const pedido = req.body;
   try {
     const novoId = await pedidosRepository.criarPedido(pedido);
-    res.status(201).json({ novoId });
+    resp.status(201).json({ novoId });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao criar pedido' });
+    resp.status(500).json({ error: 'Erro ao criar pedido' });
   }
 })
 
-endpoints.post('/pedidos/adicionar', async (req, res) => {
-  const pedido = req.body;
+endpoints.post('/pedidos/produtos', async (req, resp) => {
+  const produto = req.body;
   try {
-    const novoId = await pedidosRepository.adcionarAoPedido(pedido);
-    res.status(201).json({ novoId });
+    const novoId = await pedidosRepository.adicionarProduto(produto);
+    resp.status(201).json({ novoId });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao adicionar produto ao pedido' });
+    resp.status(500).json({ error: 'Erro ao adicionar produto ao pedido' });
   }
 })
 
-endpoints.delete('/pedidos/:id', async (req, res) => {
+endpoints.get('pedidos/produtos/:id', async (req, resp) => {
+  const id = req.params.id;
+  try {
+    const produtos = await pedidosRepository.buscarProdutos(id);
+    resp.send(produtos);
+  } catch (error) {
+    console.error(error);
+    resp.status(500).json({ error: 'Erro ao listar produtos do pedido' });
+  }
+});
+
+endpoints.put('/pedidos/preco/:id',async (req, resp) => {
+  const id = req.params.id;
+  const pedido = req.body.preco;
+  try {
+    await pedidosRepository.alterarPreco(pedido, id);
+    resp.status(200).json({ message: 'Preço atualizado com sucesso' });
+  } catch (error) {
+    console.error(error);
+    resp.status(500).json({ error: 'Erro ao atualizar preço do pedido' });
+  }
+});
+
+endpoints.delete('/pedidos/:id', async (req, resp) => {
   const id_pedido = req.params.id;
   try {
     await pedidosRepository.deletarPedido(id_pedido);
-    res.status(204).send();
+    resp.status(204).send();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao deletar pedido' });
+    resp.status(500).json({ error: 'Erro ao deletar pedido' });
   }
 })
 
-endpoints.delete('/pedidos/:id_pedido/produto/:id_produto', async (req, res) => {
+endpoints.delete('/pedidos/:id_pedido/produto/:id_produto', async (req, resp) => {
   const { id_pedido, id_produto } = req.params;
   try {
     await pedidosRepository.deletarProdutoPedido(id_pedido, id_produto);
-    res.status(204).send();
+    resp.status(204).send();
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Erro ao deletar produto do pedido' });
+    resp.status(500).json({ error: 'Erro ao deletar produto do pedido' });
   }
 })
 

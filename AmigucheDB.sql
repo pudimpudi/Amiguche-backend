@@ -6,10 +6,6 @@ use amiguche;
 
 select * from variantes;
 
-UPDATE variantes SET descricao = "Teste 5", preco = 1.34, id_produto=3 WHERE id_variantes = 4;
-
---tirei a tabela contato,alterei os nomes das tabelas e tirei a função auto increment da tabela pedidos, explicação no file pedidos repository
-
 CREATE TABLE produto(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50)
@@ -51,18 +47,21 @@ CREATE TABLE clientes(
     cep VARCHAR(10)
 )
 
+drop table pedidos;
+drop table pedidos_produtos;
+
 CREATE TABLE pedidos(
-    id_pedidos INT PRIMARY KEY,
+    id_pedidos INT PRIMARY KEY AUTO_INCREMENT,
     data_pedido DATETIME,
+    precoTotal DECIMAL(6,2),
     status VARCHAR(50),
     id_clientes INT,
-    id_produto INT,
-    Foreign Key (id_produto) REFERENCES produto(id_produto),
     FOREIGN KEY (id_clientes) REFERENCES clientes(id_clientes)
 )
 
 CREATE TABLE pedidos_produtos(
     id_pedidos_produtos INT PRIMARY KEY AUTO_INCREMENT,
+    quantidade INT,
     id_pedidos INT,
     id_produto INT,
     FOREIGN KEY (id_pedidos) REFERENCES pedidos(id_pedidos),

@@ -45,7 +45,7 @@ endpoints.post('/pedidos/produtos', async (req, resp) => {
   }
 })
 
-endpoints.get('pedidos/produtos/:id', async (req, resp) => {
+endpoints.get('/pedidos/produtos/:id', async (req, resp) => {
   const id = req.params.id;
   try {
     const produtos = await pedidosRepository.buscarProdutos(id);
@@ -56,15 +56,15 @@ endpoints.get('pedidos/produtos/:id', async (req, resp) => {
   }
 });
 
-endpoints.put('/pedidos/preco/:id',async (req, resp) => {
+endpoints.put('/pedidos/:id',async (req, resp) => {
   const id = req.params.id;
-  const pedido = req.body.preco;
+  const pedido = req.body;
   try {
-    await pedidosRepository.alterarPreco(pedido, id);
-    resp.status(200).json({ message: 'Preço atualizado com sucesso' });
+    await pedidosRepository.alterarPedido(pedido, id);
+    resp.status(200).json({ message: 'Pedido atualizado com sucesso' });
   } catch (error) {
     console.error(error);
-    resp.status(500).json({ error: 'Erro ao atualizar preço do pedido' });
+    resp.status(500).json({ error: 'Erro ao atualizar pedido' });
   }
 });
 

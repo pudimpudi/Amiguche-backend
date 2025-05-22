@@ -6,6 +6,12 @@ export async function listarProdutos() {
   return rows;
 }
 
+export async function listarNovidades(qtd) {
+  const comando = `SELECT * FROM produto ORDER BY id_produto DESC LIMIT ${qtd}`;
+  const [rows] = await connection.query(comando);
+  return rows;
+}
+
 export async function criarProduto(produto) {
   const comando = `INSERT INTO produto (nome) VALUES (?)`;
   const [rows] = await connection.query(comando, [produto.nome]);

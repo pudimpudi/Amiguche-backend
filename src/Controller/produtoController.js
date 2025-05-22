@@ -15,6 +15,23 @@ endpoints.get("/produto/:id",async (req,resp)=>{
   resp.send(registro);
 })
 
+endpoints.get("/produto/novidades/:qtd", async (req, resp) => {
+  try {
+    let qtd = Number(req.params.qtd); 
+    if (isNaN(qtd)) qtd = 6; // Valor padrão se não for número
+    
+    let registros = await produtoRepository.listarNovidades(qtd);
+    resp.send(registros);
+    
+  } catch (e) {
+    resp.status(500).send({ 
+      message: "Erro ao listar novidades",
+      error: e.message 
+    });
+    console.log("Erro:", e);
+  }
+});
+
 endpoints.post("/produto", async (req, resp) => {
   let produto = req.body;
 

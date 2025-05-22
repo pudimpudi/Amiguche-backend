@@ -6,6 +6,7 @@ use amiguche;
 
 select * from variantes;
 
+
 CREATE TABLE produto(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50)
